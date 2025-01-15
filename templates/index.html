@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio Giftzin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #00bfa5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header img {
+            height: 100px;
+        }
+        .search-box {
+            margin: 20px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #00bfa5;
+            color: white;
+        }
+        .copy-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .copy-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .modal-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .modal-footer {
+            text-align: right;
+        }
+        .modal-footer button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .modal-footer .send-btn {
+            background-color: #00bfa5;
+            color: white;
+        }
+        .modal-footer .close-btn {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/static/logo.png" alt="Giftzin Logo">
+        <h1>Directorio Giftzin</h1>
+    </header>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Buscar por nombre...">
+    </div>
+    <table id="directory">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Puesto</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in data %}
+            <tr>
+                <td>{{ person.name }}</td>
+                <td>{{ person.position }}</td>
+                <td>
+                    <span>{{ person.phone }}</span>
+                    <button class="copy-btn" onclick="copyToClipboard('{{ person.phone }}')">
+                        <img src="/static/copy-icon.png" alt="Copiar">
+                    </button>
+                    <a href="#" onclick="sendWhatsApp('{{ person.phone }}')">WhatsApp</a>
+                </td>
+                <td>
+                    <a href="mailto:{{ person.email }}">{{ person.email }}</a>
+                    <button class="copy-btn" onclick="copyToClipboard('{{ person.email }}')">
+                        <img src="/static/copy-icon.png" alt="Copiar">
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const rows = Array.from(document.querySelectorAll('tbody tr'));
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                row.style.display = name.includes(query) ? '' : 'none';
+            });
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`"${text}" copiado al portapapeles.`);
+            }).catch(err => {
+                console.error('Error al copiar al portapapeles:', err);
+            });
+        }
+
+        function sendWhatsApp(phone) {
+            const message = prompt("¿Qué mensaje deseas enviar?");
+            if (message) {
+                const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
