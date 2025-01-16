@@ -21,7 +21,7 @@ data = [
     {"name": "Rafaela Reséndiz Valencia", "position": "Cortes y conteo", "phone": "4272311106", "email": "cortes@giftzin.com"},
     {"name": "María José Pérez Lugo", "position": "Compras Nacionales", "phone": "4141075931", "email": "comprasestrategicas@giftzin.com"},
     {"name": "Araceli Adriana Hernández Bautista", "position": "Auxiliar de Marketing", "phone": "4272020119", "email": "marketingypublicidad@giftzin.com"},
-    {"name": "Alejandro Machuca", "position": "Sistemas e Infraestructura", "phone": "4411386593", "email": "infraestructuratecnologica@giftzin.com"},
+    {"name": "Alejandro Machuca", "position": "Sistemas e Infraestructura", "phone": "4272734566", "email": "infraestructuratecnologica@giftzin.com"},
     {"name": "José Iván Guerrero González", "position": "Líder Sucursal Giftzin Importaciones", "phone": "4141190764", "email": "lidersucursalimportaciones@giftzin.com"},
     {"name": "Jorge Axel Chávez Piñón", "position": "Líder Sucursal Giftzin Quiroga", "phone": "4436457333", "email": "lidersucursalquiroga@giftzin.com"},
     {"name": "Ángel Israel Huerta Torres", "position": "Líder Sucursal Giftzin Home", "phone": "4142310304", "email": "lidersucursalhome@giftzin.com"},
